@@ -314,38 +314,4 @@ systemctl daemon-reload
 systemctl enable --now powertop.service
 
 
-
-# Ask for installing Brave
-echo -e "${GREEN}Now you are installing: Brave, R, LaTeX, Sublime, Mailspring, plank${NC}"
-
-## for Brave
-apt -y install apt-transport-https curl
-curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-source /etc/os-release
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
-
-# for NordVPN
-wget -qnc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-
-# for Zotero
-wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | bash
-
-# for Sublime
-apt -y install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
-
-## Update and install all
-apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev nordvpn calibre zotero sublime-text
-
-# Ask for installing LaTeX
-echo -e "${GREEN}Do you wish to install LaTeX (i.e. texlive-full) now? (tip: it takes a long time)${NC}"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) atp -y install texlive-full; break;;
-        No ) break;;
-    esac
-done
-
 echo -e "${GREEN}FINISHED! Please reboot the machine!${NC}"
