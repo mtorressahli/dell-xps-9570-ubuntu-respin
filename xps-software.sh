@@ -49,7 +49,7 @@ curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
 # for rEFInd
-sudo apt-add-repository ppa:rodsmith/refind
+add-apt-repository ppa:rodsmith/refind
 
 ## Update and install all
 apt update
