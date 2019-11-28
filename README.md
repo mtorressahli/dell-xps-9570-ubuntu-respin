@@ -40,7 +40,7 @@ Kudos and all the credits for things not related to my work go to developers and
 If you already have a standard Ubuntu install, you can try applying basic tweaks with the `xps-tweaks.sh` script.
 You can run it directly without cloning the repository with the following command (requires `curl`):
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/dell-xps-9570-ubuntu-respin/master/xps-tweaks.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/mtorressahli/dell-xps-9570-ubuntu-respin/master/xps-tweaks.sh)"
 ```
 
 If you want touchpad gestures using X11, check https://github.com/bulletmark/libinput-gestures or better https://github.com/iberianpig/fusuma.
