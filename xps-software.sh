@@ -50,7 +50,7 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks
 # nordvpn yet not able to install by command line
 snap install mailspring
 
@@ -60,7 +60,6 @@ R CMD javareconf
 apt -y build-dep libcurl4-gnutls-dev
 apt -y install openmpi-bin openmpi-common libssl-dev r-cran-xml wajig libxml2-dev libcurl4-openssl-dev # libcurl4-gnutls-dev
 wajig install libgtk2.0-dev
-
 
 # Ask for installing LaTeX
 echo -e "${GREEN}Do you wish to install LaTeX (i.e. texlive-full) now? (tip: it takes a long time)${NC}"
