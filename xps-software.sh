@@ -24,12 +24,12 @@ add-apt-repository -y universe
 sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 apt -y update
 apt -y full-upgrade
+apt -y install synaptic apt-transport-https curl gdebi-core
 
 # Ask for installing Brave
 echo -e "${GREEN}Now you are installing: Brave, R, LaTeX, Sublime, Mailspring, plank${NC}"
 
 ## for Brave
-apt -y install apt-transport-https curl
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 source /etc/os-release
 echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
@@ -52,6 +52,7 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 apt update
 apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox gnome-tweak-tool mailspring timeshift
 # nordvpn yet not able to install by command line
+snap install mailspring
 
 #R things
 apt -y install default-jre default-jdk
