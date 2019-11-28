@@ -53,9 +53,9 @@ sudo apt-add-repository ppa:rodsmith/refind
 
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop refind
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop refind
 # nordvpn yet not able to install by command line
-snap install mailspring whatsdesk
+snap install mailspring whatsdesk dropbox
 
 # rEFInd things
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/bobafetthotmail/refind-theme-regular/master/install.sh)"
