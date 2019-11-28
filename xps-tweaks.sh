@@ -255,4 +255,96 @@ select yn in "Yes" "No"; do
     esac
 done
 
+#####################
+###               ###
+###    M O D S    ###
+###               ###
+#####################
+
+## Install all the power management tools ##
+############################################
+add-apt-repository -y ppa:linrunner/tlp
+apt -y update
+apt -y install thermald tlp tlp-rdw powertop i8kutils smbios-utils
+systemctl enable --now thermald
+
+# Fix Sleep/Wake Bluetooth Bug
+sed -i '/RESTORE_DEVICE_STATE_ON_STARTUP/s/=.*/=1/' /etc/default/tlp
+systemctl restart tlp
+
+# Fan control
+git clone https://github.com/TomFreudenberg/dell-bios-fan-control.git
+cd dell-bios-fan-control
+make
+dell-bios-fan-control 0
+systemctl enable dell-bios-fan-control
+modprobe -v i8k
+#nano /etc/modprobe.d/dell-smm-hwmon.conf
+modprobe dell-smm-hwmon restricted=0
+
+echo 'options i8k force=1' >> /etc/modprobe.d/i8k.conf
+echo 'i8k' >> /etc/modules-load.d/i8k.conf
+wget -P etc/i8kutils/ https://github.com/mtorressahli/linuxXPS9570/blob/master/i8kmon.conf
+#nano /etc/i8kutils/i8kmon.conf
+sudo systemctl enable --now i8kmon
+
+# Throttled / lenovo-fix
+apt install git build-essential python3-dev libdbus-glib-1-dev libgirepository1.0-dev libcairo2-dev python3-venv python3-wheel
+git clone https://github.com/erpalma/lenovo-throttling-fix.git
+./lenovo-throttling-fix/install.sh
+wget -P etc/ https://github.com/mtorressahli/linuxXPS9570/blob/master/lenovo_fix.conf
+sudo systemctl enable --now lenovo_fix.service
+
+# Powertop
+cat << EOF | sudo tee /etc/systemd/system/powertop.service
+[Unit]
+Description=PowerTOP auto tune
+
+[Service]
+Type=idle
+Environment="TERM=dumb"
+ExecStart=/usr/sbin/powertop --auto-tune
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now powertop.service
+
+
+
+# Ask for installing Brave
+echo -e "${GREEN}Now you are installing: Brave, R, LaTeX, Sublime, Mailspring, plank${NC}"
+
+## for Brave
+apt -y install apt-transport-https curl
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+source /etc/os-release
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
+
+# for NordVPN
+wget -qnc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+
+# for Zotero
+add-apt-repository ppa:retorquere/zotero
+
+# for Sublime
+apt -y install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
+
+## Update and install all
+apt update
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev nordvpn calibre zotero sublime-text
+
+# Ask for installing LaTeX
+echo -e "${GREEN}Do you wish to install LaTeX (i.e. texlive-full) now? (tip: it takes a long time)${NC}"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) atp -y install texlive-full; break;;
+        No ) break;;
+    esac
+done
+
 echo -e "${GREEN}FINISHED! Please reboot the machine!${NC}"
