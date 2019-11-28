@@ -57,7 +57,7 @@ apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zo
 apt -y install default-jre default-jdk
 R CMD javareconf
 apt -y build-dep libcurl4-gnutls-dev
-apt -y install  libssl-dev r-cran-xml wajig libxml2-dev libcurl4-openssl-dev # libcurl4-gnutls-dev
+apt -y install openmpi-bin openmpi-common libssl-dev r-cran-xml wajig libxml2-dev libcurl4-openssl-dev # libcurl4-gnutls-dev
 wajig install libgtk2.0-dev
 
 
