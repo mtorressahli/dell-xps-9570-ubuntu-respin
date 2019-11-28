@@ -41,7 +41,7 @@ wget -qnc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_
 wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | bash
 
 # for timeshift
-sudo add-apt-repository -y ppa:teejee2008/ppa
+add-apt-repository -y ppa:teejee2008/ppa
 
 # for Sublime
 apt -y install apt-transport-https ca-certificates curl software-properties-common
@@ -56,6 +56,9 @@ apt update
 apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop refind
 # nordvpn yet not able to install by command line
 snap install mailspring whatsdesk
+
+# rEFInd things
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/bobafetthotmail/refind-theme-regular/master/install.sh)"
 
 #R things
 apt -y install default-jre default-jdk
