@@ -284,19 +284,20 @@ modprobe dell-smm-hwmon restricted=0
 
 echo 'options i8k force=1' >> /etc/modprobe.d/i8k.conf
 echo 'i8k' >> /etc/modules-load.d/i8k.conf
-wget -P etc/i8kutils/ https://github.com/mtorressahli/linuxXPS9570/blob/master/i8kmon.conf
+curl https://github.com/mtorressahli/linuxXPS9570/blob/master/i8kmon.conf --create-dirs -o /etc/i8kutils/i8kmon.conf
+curl https://github.com/mtorressahli/linuxXPS9570/blob/master/i8kmon.conf --create-dirs -o /etc/i8kmon.conf
 #nano /etc/i8kutils/i8kmon.conf
-sudo systemctl enable --now i8kmon
+systemctl enable --now i8kmon
 
 # Throttled / lenovo-fix
-apt install git build-essential python3-dev libdbus-glib-1-dev libgirepository1.0-dev libcairo2-dev python3-venv python3-wheel
+apt -y install git build-essential python3-dev libdbus-glib-1-dev libgirepository1.0-dev libcairo2-dev python3-venv python3-wheel
 git clone https://github.com/erpalma/lenovo-throttling-fix.git
 ./lenovo-throttling-fix/install.sh
-wget -P etc/ https://github.com/mtorressahli/linuxXPS9570/blob/master/lenovo_fix.conf
-sudo systemctl enable --now lenovo_fix.service
+curl https://github.com/mtorressahli/linuxXPS9570/blob/master/lenovo_fix.conf --create-dirs -o /etc/lenovo_fix.conf
+systemctl enable --now lenovo_fix.service
 
 # Powertop
-cat << EOF | sudo tee /etc/systemd/system/powertop.service
+cat << EOF | tee /etc/systemd/system/powertop.service
 [Unit]
 Description=PowerTOP auto tune
 
@@ -327,7 +328,7 @@ echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_C
 wget -qnc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
 
 # for Zotero
-add-apt-repository ppa:retorquere/zotero
+wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | bash
 
 # for Sublime
 apt -y install apt-transport-https ca-certificates curl software-properties-common
