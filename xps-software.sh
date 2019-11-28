@@ -24,7 +24,6 @@ add-apt-repository -y universe
 apt -y update
 apt -y full-upgrade
 
-
 # Ask for installing Brave
 echo -e "${GREEN}Now you are installing: Brave, R, LaTeX, Sublime, Mailspring, plank${NC}"
 
@@ -47,7 +46,7 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox
 # nordvpn yet not able to install by command line
 
 # Ask for installing LaTeX
