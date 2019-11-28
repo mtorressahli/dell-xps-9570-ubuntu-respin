@@ -50,9 +50,9 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop
 # nordvpn yet not able to install by command line
-snap install mailspring
+snap install mailspring whatsdesk
 
 #R things
 apt -y install default-jre default-jdk
