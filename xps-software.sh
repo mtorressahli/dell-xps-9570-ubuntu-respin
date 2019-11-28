@@ -49,6 +49,14 @@ apt update
 apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox
 # nordvpn yet not able to install by command line
 
+#R things
+apt -y install default-jre default-jdk
+R CMD javareconf
+apt -y build-dep libcurl4-gnutls-dev
+apt -y install libcurl4-gnutls-dev libssl-dev r-cran-xml wajig libcurl4-openssl-dev libxml2-dev
+wajig install libgtk2.0-dev
+
+
 # Ask for installing LaTeX
 echo -e "${GREEN}Do you wish to install LaTeX (i.e. texlive-full) now? (tip: it takes a long time)${NC}"
 select yn in "Yes" "No"; do
