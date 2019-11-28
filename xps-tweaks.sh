@@ -21,19 +21,20 @@ fi
 
 # Enable universe and proposed
 add-apt-repository -y universe
+sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 apt -y update
 apt -y full-upgrade
 
-# Install all the power management tools
-if [ "$release" != "eoan" ]; then
-    add-apt-repository -y ppa:linrunner/tlp
-    apt -y update
-    apt -y install thermald tlp tlp-rdw powertop
-fi
+# # Install all the power management tools
+# if [ "$release" != "eoan" ]; then
+#     add-apt-repository -y ppa:linrunner/tlp
+#     apt -y update
+#     apt -y install thermald tlp tlp-rdw powertop
+# fi
 
-# Fix Sleep/Wake Bluetooth Bug
-sed -i '/RESTORE_DEVICE_STATE_ON_STARTUP/s/=.*/=1/' /etc/default/tlp
-systemctl restart tlp
+# # Fix Sleep/Wake Bluetooth Bug
+# sed -i '/RESTORE_DEVICE_STATE_ON_STARTUP/s/=.*/=1/' /etc/default/tlp
+# systemctl restart tlp
 
 # Install the latest nVidia driver and codecs
 echo -e "${GREEN}Do you wish to enable PRIME Offloading on the NVIDIA GPU? This may increase battery drain but will allow dynamic switching of the NVIDIA GPU without having to log out.${NC}"
@@ -265,12 +266,12 @@ done
 ############################################
 add-apt-repository -y ppa:linrunner/tlp
 apt -y update
-apt -y install thermald tlp tlp-rdw powertop i8kutils smbios-utils
+apt -y install i8kutils smbios-utils thermald # tlp tlp-rdw powertop 
 systemctl enable --now thermald
 
-# Fix Sleep/Wake Bluetooth Bug
-sed -i '/RESTORE_DEVICE_STATE_ON_STARTUP/s/=.*/=1/' /etc/default/tlp
-systemctl restart tlp
+# # Fix Sleep/Wake Bluetooth Bug
+# sed -i '/RESTORE_DEVICE_STATE_ON_STARTUP/s/=.*/=1/' /etc/default/tlp
+# systemctl restart tlp
 
 # Fan control
 git clone https://github.com/TomFreudenberg/dell-bios-fan-control.git
@@ -296,22 +297,22 @@ git clone https://github.com/erpalma/lenovo-throttling-fix.git
 curl -L https://raw.githubusercontent.com/mtorressahli/linuxXPS9570/master/lenovo_fix.conf --create-dirs -o /etc/lenovo_fix.conf
 systemctl enable --now lenovo_fix.service
 
-# Powertop
-cat << EOF | tee /etc/systemd/system/powertop.service
-[Unit]
-Description=PowerTOP auto tune
+# # Powertop
+# cat << EOF | tee /etc/systemd/system/powertop.service
+# [Unit]
+# Description=PowerTOP auto tune
 
-[Service]
-Type=idle
-Environment="TERM=dumb"
-ExecStart=/usr/sbin/powertop --auto-tune
+# [Service]
+# Type=idle
+# Environment="TERM=dumb"
+# ExecStart=/usr/sbin/powertop --auto-tune
 
-[Install]
-WantedBy=multi-user.target
-EOF
+# [Install]
+# WantedBy=multi-user.target
+# EOF
 
-systemctl daemon-reload
-systemctl enable --now powertop.service
+# systemctl daemon-reload
+# systemctl enable --now powertop.service
 
 
 echo -e "${GREEN}FINISHED! Please reboot the machine!${NC}"
