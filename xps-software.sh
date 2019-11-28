@@ -21,6 +21,7 @@ fi
 
 # Enable universe and proposed
 add-apt-repository -y universe
+sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 apt -y update
 apt -y full-upgrade
 
@@ -39,6 +40,9 @@ wget -qnc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_
 # for Zotero
 wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | bash
 
+# for timeshift
+sudo add-apt-repository -y ppa:teejee2008/ppa
+
 # for Sublime
 apt -y install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
@@ -46,7 +50,7 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text nautilus-dropbox gnome-tweak-tool mailspring timeshift
 # nordvpn yet not able to install by command line
 
 #R things
