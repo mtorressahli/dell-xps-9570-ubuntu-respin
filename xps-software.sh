@@ -48,9 +48,12 @@ apt -y install apt-transport-https ca-certificates curl software-properties-comm
 curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 
+# for rEFInd
+sudo apt-add-repository ppa:rodsmith/refind
+
 ## Update and install all
 apt update
-apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop
+apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text dropbox gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop refind
 # nordvpn yet not able to install by command line
 snap install mailspring whatsdesk
 
