@@ -58,12 +58,15 @@ apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zo
 snap install mailspring whatsdesk dropbox
 
 # rEFInd things
+rm -rf {regular-theme,refind-theme-regular}
 git clone https://github.com/bobafetthotmail/refind-theme-regular.git
 rm -rf refind-theme-regular/{src,.git}
 rm refind-theme-regular/install.sh
 rm -rf /boot/efi/EFI/refind/{regular-theme,refind-theme-regular}
 cp -r refind-theme-regular /boot/efi/EFI/refind/
-sed -i 'include refind-theme-regular/theme.conf' /boot/efi/EFI/refind/refind.conf
+rm -rf {regular-theme,refind-theme-regular}
+echo "include refind-theme-regular/theme.conf" >> /boot/efi/EFI/refind/refind.conf
+grep -qxF 'include refind-theme-regular/theme.conf' /boot/efi/EFI/refind/refind.conf || echo "include refind-theme-regular/theme.conf" >> /boot/efi/EFI/refind/refind.conf
 
 #R things
 apt -y install default-jre default-jdk
