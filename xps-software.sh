@@ -24,7 +24,7 @@ add-apt-repository -y universe
 sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 apt -y update
 apt -y full-upgrade
-apt -y install synaptic apt-transport-https curl gdebi-core
+apt -y install synaptic apt-transport-https curl gdebi-core git
 
 # Ask for installing Brave
 echo -e "${GREEN}Now you are installing: Brave, R, LaTeX, Sublime, Mailspring, plank${NC}"
@@ -58,7 +58,12 @@ apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zo
 snap install mailspring whatsdesk dropbox
 
 # rEFInd things
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/bobafetthotmail/refind-theme-regular/master/install.sh)"
+git clone https://github.com/bobafetthotmail/refind-theme-regular.git
+rm -rf refind-theme-regular/{src,.git}
+rm refind-theme-regular/install.sh
+rm -rf /boot/efi/EFI/refind/{regular-theme,refind-theme-regular}
+cp -r refind-theme-regular /boot/efi/EFI/refind/
+sed -i 'include refind-theme-regular/theme.conf' /boot/efi/EFI/refind/refind.conf
 
 #R things
 apt -y install default-jre default-jdk
