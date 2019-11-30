@@ -68,7 +68,7 @@ snap install mailspring whatsdesk dropbox
 
 # rEFInd things
 rm -rf {regular-theme,refind-theme-regular}
-git clone https://github.com/bobafetthotmail/refind-theme-regular.git
+git clone https://github.com/mtorressahli/refind-theme-regular.git
 rm -rf refind-theme-regular/{src,.git}
 rm refind-theme-regular/install.sh
 rm -rf /boot/efi/EFI/refind/{regular-theme,refind-theme-regular}
