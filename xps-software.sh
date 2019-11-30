@@ -51,6 +51,15 @@ add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 # for rEFInd
 add-apt-repository ppa:rodsmith/refind
 
+# for inSync
+if [ "$release" != "eoan" ] ; then
+    >&2 echo -e "${RED}inSync is scripted only for eoan${NC}"
+else
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
+touch /etc/apt/sources.list.d/insync.list
+echo "deb http://apt.insync.io/ubuntu eoan non-free contrib" >> /etc/apt/sources.list.d/insync.list
+fi
+
 ## Update and install all
 apt update
 apt -y install brave-browser plank libopenblas-base r-base r-base-dev calibre zotero sublime-text gnome-tweak-tool chrome-gnome-shell timeshift unrar zip unzip p7zip-full p7zip-rar rar wine winetricks telegram-desktop refind
