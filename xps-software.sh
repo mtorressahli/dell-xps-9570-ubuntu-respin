@@ -84,6 +84,10 @@ apt -y build-dep libcurl4-gnutls-dev
 apt -y install openmpi-bin openmpi-common libssl-dev r-cran-xml wajig libxml2-dev libcurl4-openssl-dev # libcurl4-gnutls-dev
 wajig install libgtk2.0-dev
 
+# Enable experimental X fractional scaling
+gsettings set org.gnome.mutter experimental-features "['x11-randr-fractional-scaling']"
+# To disable it: $ gsettings reset org.gnome.mutter experimental-features
+
 # Ask for installing LaTeX
 echo -e "${GREEN}Do you wish to install LaTeX (i.e. texlive-full) now? (tip: it takes a long time)${NC}"
 select yn in "Yes" "No"; do
